@@ -1,0 +1,16 @@
+pandas
+mlflow
+scikit-learn
+numpy
+notebook
+matplotlib
+python-box
+pyYAML
+tqdm
+ensure
+joblib
+# Optional dependencies for specific features
+types-pyYAML
+Flask
+Flask-Cors
+# Optional dependencies for visualization
