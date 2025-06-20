@@ -20,4 +20,4 @@ logging.basicConfig(
     ]
 )
 
-logger = logging.getLogger("ds_project_logger")  # Create a logger for the current module
+logger = logging.getLogger("ds_project_logger")  # Create a logger for the current module 
