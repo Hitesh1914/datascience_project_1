@@ -7,3 +7,9 @@ data_ingestion:
   local_data_file: artifacts/data_ingestion/winequality_data.zip # Local path where the data will be downloaded
   unzip_dir: artifacts/data_ingestion   # Directory where the data will be unzipped
   
+
+data_validation:
+  root_dir: artifacts/data_validation # Root directory for data validation artifacts
+  unzip_data_dir: artifacts/data_ingestion/winequality-red.csv # Directory where the data is unzipped
+  STATUS_FILE: artifacts/data_validation/status.txt # File to store validation status
+  

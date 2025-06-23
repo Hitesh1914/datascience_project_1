@@ -1,7 +1,7 @@
 from src.data_science_project_1.constants import * # constants.py is a module that contains constants used in the project
 from src.data_science_project_1.utils.common import read_yaml, create_directories
 from src.data_science_project_1.entity.config_entity import (DataIngestionConfig) # DataIngestionConfig is a class that defines the data ingestion configuration
-
+from src.data_science_project_1.entity.config_entity import (DataValidationConfig) # DataValidationConfig is a class that defines the data validation configuration
 class ConfigurationManager:
     def __init__(self,
                  config_file_path= CONFIG_FILE_PATH, # CONFIG_FILE_PATH is a constant that contains the path to the config.yaml file
@@ -25,3 +25,18 @@ class ConfigurationManager:
             unzip_dir=config.unzip_dir
         )
         return data_ingestion_config # return an instance of DataIngestionConfig class with the data ingestion configuration
+    
+    def get_data_validation_config(self) -> DataValidationConfig:
+        config = self.config.data_validation # data_validation 
+        schema = self.schema.COLUMNS      # COLUMNS is a key in the schema dictionary that contains the schema for the data
+        
+        create_directories([config.root_dir]) # create the root directory for data validation if it
+
+        data_validation_config = DataValidationConfig(
+            root_dir=config.root_dir, # root_dir is the directory where the data will be stored
+            STATUS_FILE= config.STATUS_FILE,
+            unzip_data_dir= config.unzip_data_dir, # unzip_data_dir is the directory where the unzipped data will be stored
+            all_schema = schema # all_schema is the schema for the data
+         
+                    )
+        return data_validation_config # DataValidationConfig is a dataclass that contains the configuration for data validation
