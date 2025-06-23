@@ -1,1 +1,5 @@
-key: value
+# This file contains hyperparameters for machine learning models.
+# It is used by the model trainer to configure the models.
+ElasticNet: 
+  alpha: 0.2
+  l1_ratio: 0.1
