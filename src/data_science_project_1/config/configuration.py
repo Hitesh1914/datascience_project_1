@@ -1,7 +1,7 @@
 from src.data_science_project_1.constants import * # constants.py is a module that contains constants used in the project
 from src.data_science_project_1.utils.common import read_yaml, create_directories
 from src.data_science_project_1.entity.config_entity import (DataIngestionConfig) # DataIngestionConfig is a class that defines the data ingestion configuration
-from src.data_science_project_1.entity.config_entity import (DataValidationConfig) # DataValidationConfig is a class that defines the data validation configuration
+from src.data_science_project_1.entity.config_entity import (DataValidationConfig, DataTransformationConfig) # DataValidationConfig is a class that defines the data validation configuration
 class ConfigurationManager:
     def __init__(self,
                  config_file_path= CONFIG_FILE_PATH, # CONFIG_FILE_PATH is a constant that contains the path to the config.yaml file
@@ -40,3 +40,12 @@ class ConfigurationManager:
          
                     )
         return data_validation_config # DataValidationConfig is a dataclass that contains the configuration for data validation
+    
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        config = self.config.data_transformation # data_transformation is a key in the config dictionary that contains the configuration for data transformation
+        create_directories([config.root_dir]) # create_directories is a function that creates directories if they do not exist
+        data_transformation_config = DataTransformationConfig(
+            root_dir=  config.root_dir,
+            data_path= config.data_path
+        )
+        return data_transformation_config
