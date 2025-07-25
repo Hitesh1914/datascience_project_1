@@ -3,7 +3,8 @@ from src.data_science_project_1.utils.common import read_yaml, create_directorie
 from src.data_science_project_1.entity.config_entity import (DataIngestionConfig) # DataIngestionConfig is a class that defines the data ingestion configuration
 from src.data_science_project_1.entity.config_entity import (DataValidationConfig,
                                                              DataTransformationConfig,
-                                                             ModelTrainerConfig) # DataValidationConfig is a class that defines the data validation configuration
+                                                             ModelTrainerConfig,
+                                                             ModelEvaluationConfig) # DataValidationConfig is a class that defines the data validation configuration
 class ConfigurationManager:
     def __init__(self,
                  config_file_path= CONFIG_FILE_PATH, # CONFIG_FILE_PATH is a constant that contains the path to the config.yaml file
@@ -69,3 +70,26 @@ class ConfigurationManager:
             target_column=schema.name  # schema.name is the name of the target column in the schema.yaml file
         )
         return model_trainer_config
+
+    def get_model_evaluation_config(self) -> ModelEvaluationConfig:
+        """
+        Returns the configuration for model evaluation.
+        """
+        config = self.config.model_evaluation # model_evaluation is a section in the config.yaml file that contains the configuration for model evaluation
+        params = self.params.ElasticNet  # params is a section in the params.yaml file that contains the parameters for the ElasticNet model
+        schema = self.schema.TARGET_COLUMN  # schema is a section in the schema.yaml file that contains the target column name
+
+        create_directories([config.root_dir])  # create_directories is a function that creates the directories if they do not exist
+
+        model_evaluation_config = ModelEvaluationConfig(
+
+            root_dir= config.root_dir,
+            test_data_path= config.test_data_path,
+            model_path= config.model_path,
+            all_params= params,
+            metric_file_name= config.metric_file_name,
+            target_column= schema.name,  # target_column is the name of the
+            #target_column=self.schema.name,  # target_column is the name of the target column in the dataset
+            mlflow_uri= "https://dagshub.com/hiteshkumavat0/datascience_project_1.mlflow"   # Replace with your DagsHub MLflow tracking URI
+        )
+        return model_evaluation_config

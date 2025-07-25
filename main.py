@@ -6,6 +6,7 @@ from src.data_science_project_1.pipeline.data_validation_pipeline import DataVal
 from src.data_science_project_1.pipeline.data_transformation_pipeline import DataTransformationTrainingPipeline
 
 from src.data_science_project_1.pipeline.model_trainer_pipeline import ModelTrainerPipeline
+from src.data_science_project_1.pipeline.data_evalution_pipeline import ModelEvaluationPipeline
 
 
 STAGE_NAME = "Data Ingestion Stage"
@@ -49,3 +50,14 @@ try:
 except Exception as e:
     logger.exception(e)  # Log any exceptions that occur during the model training process
     raise e  # Raise the exception to stop the execution
+
+STAGE_NAME = "Model Evaluation Stage"
+try:
+    logger.info(f">>>>>>> stage {STAGE_NAME} started <<<<<<<<")
+    obj = ModelEvaluationPipeline()  # Create an instance of ModelEvaluationPipeline
+    obj.initiate_model_evaluation()  # Start the model evaluation process
+    logger.info(f">>>>>>> stage {STAGE_NAME} completed <<<<<<<<")
+except Exception as e:
+    logger.exception(e)  # Log any exceptions that occur during the model evaluation process
+    raise e  # Raise the exception to stop the execution
+    
